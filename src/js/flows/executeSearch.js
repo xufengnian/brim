@@ -91,7 +91,7 @@ export default function executeSearch(search: $Search): Thunk {
 
 function transformStats(payload) {
   return {
-    currentTs: brim.time(payload.current_ts).toFracSec(),
+    currentTs: payload.current_ts,
     startTime: brim.time(payload.start_time).toFracSec(),
     updateTime: brim.time(payload.update_time).toFracSec(),
     bytesMatched: payload.bytes_matched,

@@ -33,18 +33,8 @@ $tab-border-radius-bottom: 6px;
 
   .tab-content {
     overflow: hidden;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     height: 100%;
     position: relative;
-  }
-
-  .loading {
-    position: absolute;
-    left: 10px;
-    top: 6px;
-    transform: translateX(-30px);
   }
 
   // the little line when the tab is not active
@@ -70,6 +60,7 @@ $tab-border-radius-bottom: 6px;
     width: $tab-border-radius-bottom;
     height: $tab-border-radius-bottom;
   }
+
   .ramp-right {
     left: 100%;
   }
@@ -77,8 +68,20 @@ $tab-border-radius-bottom: 6px;
     right: 100%;
   }
 
+  .table-progress-pie {
+    circle {
+      stroke: $tab-active-color;
+    }
+    margin-right: 7px;
+  }
+
   // Title
   .title {
+    display: flex;
+    will-change: transform;
+    position: absolute;
+    top: 7px;
+    left: -16px;
     font-family: system-ui;
     font-size: 12px;
     margin: 0;
@@ -87,16 +90,16 @@ $tab-border-radius-bottom: 6px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding-left: 10px;
-    flex: 1;
   }
 
   // Close x icon
   .close-button {
+    position: absolute;
+    top: 7px;
+    right: 10px;
     width: 17px;
     height: 17px;
     min-width: 17px;
-    margin-right: 10px;
     svg {
       width: 9px;
       height: 9px;

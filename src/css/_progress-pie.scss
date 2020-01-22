@@ -1,0 +1,15 @@
+.progress-pie {
+  width: 16px;
+  height: 16px;
+
+  svg {
+    transform: rotate(-90deg);
+  }
+  .track {
+    stroke: $gray-5;
+  }
+
+  .fill {
+    stroke: $gray-5;
+  }
+}

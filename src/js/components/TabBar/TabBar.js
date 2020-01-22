@@ -7,6 +7,7 @@ import {useResizeObserver} from "../hooks/useResizeObserver"
 import AddTab from "./AddTab"
 import SearchTab from "./SearchTab"
 import Tabs from "../../state/Tabs"
+import Viewer from "../../state/Viewer"
 import brim from "../../brim"
 import lib from "../../lib"
 import useTabController from "./useTabController"
@@ -37,6 +38,7 @@ export default function TabBar() {
               onDown: () => ctl.onTabClick(tab.id),
               onChange: (indices) => ctl.onTabMove(indices)
             })}
+            loading={Viewer.isFetching(tab)}
             key={tab.id}
             title={brim.tab(tab).title()}
             style={layout.getStyle(tab.id)}
