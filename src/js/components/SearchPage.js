@@ -27,10 +27,27 @@ import Investigation from "../state/Investigation"
 import MainHistogramChart from "./charts/MainHistogram/Chart"
 import SearchBar from "../state/SearchBar"
 import SettingsModal from "./SettingsModal"
+import Tab from "../state/Tab"
 import TabBar from "./TabBar/TabBar"
+import Viewer from "../state/Viewer"
 import WhoisModal from "./WhoisModal"
+import brim from "../brim"
 import useSearchShortcuts from "./useSearchShortcuts"
 
+function useProgress() {
+  let {currentTs} = useSelector(Viewer.getStats)
+  let [start, end] = useSelector(Tab.getSpan)
+    .map(brim.time)
+    .map((t) => t.toDate())
+
+  let c = brim.time(currentTs).toDate()
+
+  console.group("render")
+  console.log("start", start)
+  console.log("curr ", c)
+  console.log("end  ", end)
+  console.groupEnd()
+}
 export default function SearchPage() {
   let logsTab = !hasAnalytics(useSelector(SearchBar.getSearchProgram))
   let finding = useSelector(Investigation.getCurrentFinding)
@@ -38,7 +55,7 @@ export default function SearchPage() {
   let results = useResizeObserver()
   let dispatch = useDispatch()
   useSearchShortcuts()
-
+  useProgress()
   useEffect(() => {
     ipcRenderer.send("open-search-window")
     dispatch(initSpace("default"))

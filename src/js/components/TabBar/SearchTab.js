@@ -1,18 +1,37 @@
 /* @flow */
 import {animated, useSpring} from "react-spring"
+import {useSelector} from "react-redux"
 import React from "react"
 import classNames from "classnames"
 
 import CloseButton from "../CloseButton"
 import RampLeft from "../../icons/ramp-left.svg"
 import RampRight from "../../icons/ramp-right.svg"
+import Tab from "../../state/Tab"
 import TableProgressPie from "../TableProgressPie"
+import Viewer from "../../state/Viewer"
+import brim from "../../brim"
 
 type Props = {
   title: string,
   removeTab: Function,
   active: boolean,
   loading: boolean
+}
+
+function useProgress() {
+  let {currentTs} = useSelector(Viewer.getStats)
+  let [start, end] = useSelector(Tab.getSpan)
+    .map(brim.time)
+    .map((t) => t.toDate())
+
+  let c = brim.time(currentTs).toDate()
+
+  console.group("render")
+  console.log("start", start)
+  console.log("curr ", c)
+  console.log("end  ", end)
+  console.groupEnd()
 }
 
 const SearchTab = React.forwardRef<Props, HTMLDivElement>(function SearchTab(
@@ -29,7 +48,6 @@ const SearchTab = React.forwardRef<Props, HTMLDivElement>(function SearchTab(
     <div ref={ref} {...rest} className={classNames("tab", {active})}>
       <div className="tab-content">
         <animated.p className="title" style={style}>
-          <TableProgressPie />
           {title}
         </animated.p>
         <CloseButton onClick={removeTab} />

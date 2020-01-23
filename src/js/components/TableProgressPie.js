@@ -1,7 +1,11 @@
 /* @flow */
+import {useSelector} from "react-redux"
 import React, {useEffect, useState} from "react"
 
 import ProgressPie from "./ProgressPie"
+import Tab from "../state/Tab"
+import Viewer from "../state/Viewer"
+import brim from "../brim"
 
 export default function TableProgressPie() {
   let [index, setIndex] = useState(0)
