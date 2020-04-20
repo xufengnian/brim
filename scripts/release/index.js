@@ -43,6 +43,10 @@ program
         })
       )
     if (cmd.linux)
-      pack.linux().then(() => Promise.all([install.debian(), install.redhat()]))
+      pack
+        .linux()
+        .then(() =>
+          Promise.all([install.debian(), install.flatpak(), install.redhat()])
+        )
   })
   .parse(process.argv)

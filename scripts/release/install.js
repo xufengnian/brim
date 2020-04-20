@@ -4,6 +4,7 @@ const os = require("os")
 const installerWin = require("electron-winstaller")
 const installerDebian = require("electron-installer-debian")
 const installerRedhat = require("electron-installer-redhat")
+const installerFlatpak = require("electron-installer-flatpak")
 const createDMG = require("electron-installer-dmg")
 const createZip = require("electron-installer-zip")
 const path = require("path")
@@ -93,6 +94,19 @@ module.exports = {
       ...defaultLinuxOpts,
       ext: "rpm",
       arch: "x86_64"
+    })
+  },
+
+  flatpak: function() {
+    console.log("Building flatpak package installer")
+    return installerFlatpak({
+      ...defaultLinuxOpts,
+      ext: "flatpak",
+      options: {
+        ...defaultLinuxOpts.options,
+        id: "com.brimsecurity.brim",
+        arch: "x64"
+      }
     })
   }
 }
