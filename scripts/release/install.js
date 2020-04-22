@@ -4,7 +4,7 @@ const os = require("os")
 const installerWin = require("electron-winstaller")
 const installerDebian = require("electron-installer-debian")
 const installerRedhat = require("electron-installer-redhat")
-const installerFlatpak = require("electron-installer-flatpak")
+const installerFlatpak = require("@malept/electron-installer-flatpak")
 const createDMG = require("electron-installer-dmg")
 const createZip = require("electron-installer-zip")
 const path = require("path")
@@ -19,7 +19,7 @@ const defaultLinuxOpts = {
   },
   options: {
     homepage: "https://www.brimsecurity.com",
-    icon: "./dist/static/AppIcon.png",
+    icon: "dist/static/AppIcon.png",
     maintainer: "Brim Security, Inc. <support@brimsecurity.com>"
   }
 }
@@ -100,13 +100,19 @@ module.exports = {
   flatpak: function() {
     console.log("Building flatpak package installer")
     return installerFlatpak({
-      ...defaultLinuxOpts,
-      ext: "flatpak",
+      src: "./dist/packages/Brim-linux-x64",
+      arch: "x64",
+      dest: out,
       options: {
-        ...defaultLinuxOpts.options,
-        id: "com.brimsecurity.brim",
-        arch: "x64"
+        icon: {
+          "256x265": "./dist/static/AppIcon.256.png",
+          "128x128": "./dist/static/AppIcon.128.png",
+          "96x96": "./dist/static/AppIcon.96.png",
+          "64x64": "./dist/static/AppIcon.64.png"
+        }
       }
+    }).catch((err) => {
+      console.log("flatpak.err", err)
     })
   }
 }
