@@ -105,7 +105,7 @@ jobs:
 
           ${{ steps.zq_pr.outputs.body }}
           EOF
-          git push "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" HEAD:update-zq-and-test
+          git push "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" HEAD:protected-test
 
       - uses: actions/upload-artifact@v1
         if: failure()
