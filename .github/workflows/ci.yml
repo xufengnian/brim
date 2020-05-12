@@ -17,7 +17,7 @@ jobs:
         uses: softprops/turnstyle@v0.1.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+      - run: sleep 60
       - uses: actions/checkout@v2
       - run: git config --local user.email 'automation@brimsecurity.com'
       - run: git config --local user.name 'Brim Automation'
