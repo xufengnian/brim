@@ -24,4 +24,4 @@ jobs:
       - run: date > a
       - run: git add a
       - run: git commit -a -m "update $(date)"
-      - run: git push "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" HEAD:fake-master-for-zq-updates
+      - run: git push "https://${GITHUB_ACTOR}:${{ secrets.ZQ_UPDATE_PAT }}@github.com/${GITHUB_REPOSITORY}.git" HEAD:fake-master-for-zq-updates
